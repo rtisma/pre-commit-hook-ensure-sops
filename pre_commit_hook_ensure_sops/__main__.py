@@ -56,6 +56,8 @@ def check_file(filename):
         except ParserError:
             # All sops encrypted files are valid JSON or YAML
             return False, f"{filename}: Not valid JSON or YAML, is not properly encrypted"
+        except Exception as e:
+            return False, f"Exception for file {filename}: {e.__class__.__name__}: {e}"
 
     if 'sops' not in doc:
         # sops puts a `sops` key in the encrypted output. If it is not
